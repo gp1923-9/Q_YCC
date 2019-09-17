@@ -20,6 +20,8 @@
     <JAVADOC>
       <root url="http://www.scala-lang.org/api/2.11.8/" />
     </JAVADOC>
-    <SOURCES />
+    <SOURCES>
+      <root url="jar://F:/北京千峰/Spark/spark项目/gp23/项目day01/Spark用户画像分析/spark-assembly-1.6.0-hadoop2.6.0.jar!/" />
+    </SOURCES>
   </library>
 </component>
