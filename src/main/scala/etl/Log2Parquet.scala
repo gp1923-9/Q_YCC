@@ -1,15 +1,14 @@
 package etl
 
-import org.apache.spark.sql.{Row, SQLContext}
-import org.apache.spark.{SparkConf, SparkContext}
-import util.{SchemaUtil, String2Type}
+import org.apache.spark.sql._
+import _root_.util.{SchemaUtil, String2Type}
 
 /**
   * 进行数据格式转换
   */
 object Log2parquet {
   def main(args: Array[String]): Unit = {
-    System.setProperty("hadoop.home.dir", "D:\\Huohu\\下载\\hadoop-common-2.2.0-bin-master")
+    System.setProperty("hadoop.home.dir", "E:\\BigDate\\hadoop-2.8.1")
     // 设定目录限制
     if(args.length != 2 ){
       println("目录不正确，退出程序")
@@ -18,13 +17,17 @@ object Log2parquet {
     // 获取目录参数
     val  Array(inputPath,outputPath) = args
 
-    val conf = new SparkConf().setAppName(this.getClass.getName).setMaster("local[*]")
+    val spark = SparkSession.builder()
+      .appName(this.getClass.getName)
+      .master("local[*]")
+      // 设置压缩方式
+      .config("spark.sql.parquet.compression.codec","snappy")
       // 设置序列化级别
-      .set("spark.serializer","org.apache.spark.serializer.KryoSerializer")
-    val sc = new SparkContext(conf)
-    val sQLContext = new SQLContext(sc)
-    // 设置压缩方式
-    sQLContext.setConf("spark.sql.parquet.compression.codec","snappy")
+      .config("spark.serializer","org.apache.spark.serializer.KryoSerializer")
+      .getOrCreate()
+
+    val sc = spark.sparkContext
+
     // 处理数据
     val lines = sc.textFile(inputPath)
     // 设置过滤条件和切分条件 内部如果切割条件相连过多，那么 需要设置切割处理条件
@@ -117,8 +120,10 @@ object Log2parquet {
         String2Type.toInt(arr(84))
       )
     })
-    val df = sQLContext.createDataFrame(rowRDD,SchemaUtil.structType)
+    val df: DataFrame = spark.createDataFrame(rowRDD,SchemaUtil.structType)
     df.write.parquet(outputPath)
+//    val jsons: Dataset[String] = df.toJSON
+//    jsons.write.json("F:\\sparkProject\\ouput\\json")
     // 关闭
     sc.stop()
   }
