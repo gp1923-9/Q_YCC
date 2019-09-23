@@ -8,7 +8,7 @@ import util.Tag
   * 广告标签
   */
 object TagsAd extends Tag{
-  override def makeTags(args: Any*): List[(String, Int)] = {
+  override def makeTags(args: Any*): List[(String,  Int)] = {
     var list: List[(String, Int)] = List[(String, Int)]()
     //获取数据类型
     val row: Row = args(0).asInstanceOf[Row]
