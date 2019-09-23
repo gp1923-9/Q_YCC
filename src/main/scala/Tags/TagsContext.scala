@@ -24,7 +24,7 @@ object TagsContext {
     val Array(inputPath,docs,stopwords,day)=args
 
     // 创建Spark上下文
-    val spark = SparkSession.builder().appName("Tags").master("local").getOrCreate()
+    val spark = SparkSession.builder().appName("Tags").master("local[*]").getOrCreate()
     import spark.implicits._
 
     // 调用HbaseAPI

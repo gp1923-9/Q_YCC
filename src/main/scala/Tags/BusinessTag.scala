@@ -15,13 +15,13 @@ object BusinessTag extends Tag{
     //获取数据
     val row = args(0).asInstanceOf[Row]
     //获取经纬度
-    if(String2Type.toDouble(row.getAs[String]("long")) >= 73
-    && String2Type.toDouble(row.getAs[String]("long")) <= 136
-    && String2Type.toDouble(row.getAs[String]("lat"))>= 3
-    && String2Type.toDouble(row.getAs[String]("lat"))<= 53){
+    if(String2Type.toDouble(row.getAs[String]("lat")) >= 73
+    && String2Type.toDouble(row.getAs[String]("lat")) <= 136
+    && String2Type.toDouble(row.getAs[String]("long"))>= 3
+    && String2Type.toDouble(row.getAs[String]("long"))<= 53){
       //经纬度
-      val long = row.getAs[String]("long").toDouble
-      val lat = row.getAs[String]("lat").toDouble
+      val long = row.getAs[String]("lat").toDouble
+      val lat = row.getAs[String]("long").toDouble
 //      getBusiness(long,lat)
       //获取到商圈名称
       val business = getBusiness(long,lat)

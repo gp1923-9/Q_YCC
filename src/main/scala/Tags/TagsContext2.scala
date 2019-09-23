@@ -19,7 +19,7 @@ object TagsContext2 {
     //    val Array(inputPath) = args
 
     // 创建Spark上下文
-    val spark = SparkSession.builder().appName("Tags").master("local").getOrCreate()
+    val spark = SparkSession.builder().appName("Tags").master("local[*]").getOrCreate()
     spark.sparkContext.setLogLevel("Error")
     import spark.implicits._
 
@@ -79,7 +79,7 @@ object TagsContext2 {
       val rows = row._2
       val adList: List[(String, Int)] = TagsAd.makeTags(rows)
       //获取商圈
-      //      val businessList = BusinessTag.makeTags(row)
+      // val businessList = BusinessTag.makeTags(row)
       // 媒体标签
       val appList = TagsAPP.makeTags(rows, broadValue)
       // 设备标签
@@ -126,7 +126,6 @@ object TagsContext2 {
 //          (cnId, tagsAndUserId)
 //        }
 //      }
-//      //聚合value --聚合所有标签
 //      .reduceByKey((list1, list2) => {
 //      (list1 ++ list2).groupBy(_._1).mapValues(_.map(_._2).size).toList
 //    }).foreach(println)

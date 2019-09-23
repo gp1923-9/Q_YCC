@@ -17,7 +17,7 @@ object AmapUtil {
     // location=116.310003,39.991957&key=59283c76b065e4ee401c2b8a4fde8f8b&extensions=all
     val location = long+","+lat
     //获取URL
-    val url = "https://restapi.amap.com/v3/geocode/regeo?location="+location+"&key=59283c76b065e4ee401c2b8a4fde8f8b&extensions=all"
+    val url = "https://restapi.amap.com/v3/geocode/regeo?location="+location+"&key=4bc791b34218e6f18404a8266ee79495"
 
     //调用Http接口发送请求
     val jsonstr: String = HttpUtil.get(url)
