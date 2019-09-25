@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<configuration>
+  <property>
+  <name>hive.metastore.uris</name>
+  <value>thrift://hadoop0001:9083</value>
+</property>
+
+<property>
+  <name>hive.metastore.warehouse.dir</name>
+  <value>/usr/local/apps/hive-1.2.1/warehouse</value>
+</property>
+
+<property>
+  <name>javax.jdo.option.ConnectionURL</name>
+  <value>jdbc:mysql://192.168.233.91:3306/hive?createDatabaseIfNotExists=true&amp;useUnicode=true&amp;characterEncoding=utf8</value>
+</property>
+
+<property>
+  <name>javax.jdo.option.ConnectionDriverName</name>
+  <value>com.mysql.jdbc.Driver</value>
+</property>
+
+<property>
+  <name>javax.jdo.option.ConnectionUserName</name>
+  <value>root</value>
+</property>
+
+<property>
+  <name>javax.jdo.option.ConnectionPassword</name>
+  <value>123456</value>
+</property>
+
+<!-- 开启hive的本地模式  -->
+  <property>
+    <name>hive.exec.mode.local.auto</name>
+    <value>true</value>
+  </property>
+<!-- 开启你当前库的显示 -->
+ <property>
+    <name>hive.cli.print.current.db</name>
+    <value>true</value>
+  </property>
+<!-- 开启你当前列名的显示 -->
+ <property>
+    <name>hive.cli.print.header</name>
+    <value>true</value>
+  </property>
+</configuration>
